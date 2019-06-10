@@ -39,7 +39,7 @@ void lm_driver_all_init(void)
     PDRIVER_INIT *init = NULL;
 
     /* 1.初始化所有驱动 */
-    for (init = LM_DRIVER_INIT_START; init < LM_DRIVER_INIT_END; ) {
+    for (init = LM_DRIVER_INIT_START; init < LM_DRIVER_INIT_END; init++) {
         if (NULL != (*init)->driver_init) {
             total++;
             if (LM_ERR_SUCCESS != ((*init)->driver_init)()) {

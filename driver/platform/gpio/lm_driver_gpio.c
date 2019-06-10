@@ -102,8 +102,9 @@ void lm_gpio_pin_set(const char *name, uint8_t value)
         return ;
     }
 
-    /* 2.计算pin脚地址 */
+    /* 2.计算pin脚地址   "PD3"   */
     io_pin = atoi(name+2);
+
     io_pin = 1 << io_pin;
 
     /* 3.pin脚有效值检测 */

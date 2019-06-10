@@ -17,8 +17,6 @@
 
 #include "lm_app.h"
 
-#include "stm32l0xx_hal.h"
-
 /*******************************************************************************
 * Description   : 模块内部变量定义区
 *******************************************************************************/
@@ -38,7 +36,7 @@ static unsigned short fac_ms = 0;
 static int8_t lm_delay_init(void)
 {
     SysTick->CTRL &= ~(1<<2);
-    fac_us = 36 / 8;
+    fac_us = 32/8;
     fac_ms=(unsigned short)fac_us*1000;
 
     return LM_ERR_SUCCESS;
@@ -85,6 +83,17 @@ void delay_ms(unsigned short nms)
     } while((temp&0x01)&&!(temp&(1<<16)));
     SysTick->CTRL=0x00;
     SysTick->VAL =0X00;
+}
+
+/*******************************************************************************
+* FunName       : SYSTICK_IRQ_HANDLER()
+* Description   : systick中断函数
+* EntryParam    : None
+* ReturnValue   : None
+*******************************************************************************/
+void SYSTICK_IRQ_HANDLER(void)
+{
+    HAL_IncTick();
 }
 
 /*******************************************************************************
